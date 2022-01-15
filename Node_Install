@@ -1,0 +1,214 @@
+How to Install Node.js and npm on Ubuntu 20.04
+Posted  May 11, 2020
+
+•
+5 min read
+
+Install Node.js and npm on Ubuntu 20.04
+Node.js is a cross-platform JavaScript runtime environment built on Chrome’s JavaScript, designed to execute JavaScript code on the server-side. It is generally used to build back-end applications, but it is also popular as a full-stack and front-end solution. npm is the default package manager for Node.js and the world’s largest software registry.
+
+In this tutorial, we will explore three different ways of installing Node.js and npm on Ubuntu 20.04:
+From the standard Ubuntu repositories. This is the easiest way to install Node.js and npm on Ubuntu and should be sufficient for most use cases. The version included in the Ubuntu repositories is 10.19.0.
+From the NodeSource repository. Use this repository if you want to install a different Node.js version than the one provided in the Ubuntu repositories. Currently, NodeSource supports Node.js v14.x, v13.x, v12.x, and v10.x.
+Using nvm (Node Version Manager). This tool allows you to have multiple Node.js versions installed on the same machine. If you are Node.js developer, then this is the preferred way of installing Node.js.
+Choose the installation method that is appropriate for your environment. If you are not sure which Node.js version to install, consult the documentation of the application you’re going to deploy.
+Install Node.js and npm from the Ubuntu repository
+At the time of writing, the Node.js version included in the Ubuntu 20.04 repositories is 10.19.0 which is the previous TLS version.
+
+The installation is pretty straightforward. Run the following commands to update the package index and install Node.js and npm:
+--------------------------------------------
+sudo apt update
+--------------------------------------------
+sudo apt install nodejs npm
+--------------------------------------------
+The command above will install a number of packages, including the tools necessary to compile and install native addons from npm.
+Once done, verify the installation by running:
+--------------------------------------------
+nodejs --version
+--------------------------------------------
+v10.19.0
+--------------------------------------------
+Installing Node.js and npm from NodeSource
+NodeSource is a company focused on providing enterprise-grade Node support. It maintains an APT repository containing multiple Node.js versions. Use this repository if your application requires a specific version of Node.js.
+
+At the time of writing, NodeSource repository provides the following versions:
+
+v14.x - The latest stable version.
+v13.x
+v12.x - The latest LTS version.
+v10.x - The previous LTS version.
+We’ll install Node.js version 14.x:
+
+Run the following command as a user with sudo privileges to download and execute the NodeSource installation script:
+--------------------------------------------
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+--------------------------------------------
+The script will add the NodeSource signing key to your system, create an apt repository file, install all necessary packages, and refresh the apt cache.
+
+If you need another Node.js version, for example 12.x, change the setup_14.x with setup_12.x.
+
+Once the NodeSource repository is enabled, install Node.js and npm:
+--------------------------------------------
+sudo apt install nodejs
+--------------------------------------------
+The nodejs package contains both the node and npm binaries.
+
+Verify that the Node.js and npm were successfully installed by printing their versions:
+--------------------------------------------
+node --version
+--------------------------------------------
+v14.2.0
+--------------------------------------------
+npm --version
+--------------------------------------------
+6.14.4
+--------------------------------------------
+To be able to compile native addons from npm you’ll need to install the development tools:
+--------------------------------------------
+sudo apt install build-essential
+--------------------------------------------
+Installing Node.js and npm using NVM
+NVM (Node Version Manager) is a bash script that allows you to manage multiple Node.js versions on a per-user basis. With NVM you can install and uninstall any Node.js version that you want to use or test.
+Visit the nvm GitHub repository page and Copy either the curl or wget command to download and install the nvm script:
+--------------------------------------------
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+--------------------------------------------
+Do not use sudo as it will enable nvm for the root user.
+
+The script will clone the project’s repository from Github to the ~/.nvm directory:
+
+=> Close and reopen your terminal to start using nvm or run the following to use it now:
+--------------------------------------------
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+--------------------------------------------
+As the output above says, you should either close and reopen the terminal or run the commands to add the path to nvm script to the current shell session. You can do whatever is easier for you.
+Once the script is in your PATH, verify that nvm was properly installed by typing:
+--------------------------------------------
+nvm --version
+--------------------------------------------
+0.35.3
+--------------------------------------------
+To get a list of all Node.js versions that can be installed with nvm, run:
+--------------------------------------------
+nvm list-remote
+--------------------------------------------
+The command will print a huge list of all available Node.js versions.
+To install the latest available version of Node.js, run:
+--------------------------------------------
+nvm install node
+--------------------------------------------
+The output should look something like this:
+--------------------------------------------
+...
+Checksums matched!
+Now using node v14.2.0 (npm v6.14.4)
+Creating default alias: default -> node (-> v14.2.0)
+--------------------------------------------
+Once the installation is completed, verify it by printing the Node.js version:
+--------------------------------------------
+node --version
+--------------------------------------------
+v14.2.0
+--------------------------------------------
+Let’s install two more versions, the latest LTS version and version 10.9.0:
+--------------------------------------------
+nvm install --lts
+nvm install 10.9.0
+----------------------------------------------------------------------------------------
+You can list the installed Node.js versions by typing:
+--------------------------------------------
+nvm ls
+--------------------------------------------
+The output should look something like this:
+--------------------------------------------
+>      v10.9.0
+       v12.16.3
+        v14.2.0
+default -> node (-> v14.2.0)
+node -> stable (-> v14.2.0) (default)
+stable -> 14.2 (-> v14.2.0) (default)
+iojs -> N/A (default)
+unstable -> N/A (default)
+lts/* -> lts/erbium (-> v12.16.3)
+lts/argon -> v4.9.1 (-> N/A)
+lts/boron -> v6.17.1 (-> N/A)
+lts/carbon -> v8.17.0 (-> N/A)
+lts/dubnium -> v10.20.1 (-> N/A)
+lts/erbium -> v12.16.3
+--------------------------------------------
+The entry with an arrow on the right (> v10.9.0) is the Node.js version used in the current shell session and the default version is set to v14.2.0. Default version is the version that will be active when opening new shells.
+If you want to change the currently active version enter:
+--------------------------------------------
+nvm use 12.16.3
+--------------------------------------------
+Now using node v12.16.3 (npm v6.14.4)
+--------------------------------------------
+To change the default Node.js version, run the following command:
+--------------------------------------------
+nvm alias default 12.16.3
+--------------------------------------------
+For more detailed information about how to use the nvm script, visit the project’s GitHub page.
+
+Conclusion
+We have shown you three different ways to install Node.js and npm on your Ubuntu 20.04 server. The method you choose depends on your requirements and preferences. Even though installing the packaged version from the Ubuntu or NodeSource repository is easier, the nvm method gives you more flexibility for adding and removing different Node.js versions on a per-user basis.
+
+If you want to use Yarn to manage your application dependencies, check our tutorial on how to install and use yarn on Ubuntu 20.04 .
+Feel free to leave a comment if you have any questions.
+
+nodejs
+npm
+nvm
+ubuntu
+If you like our content, please consider buying us a coffee.
+Thank you for your support!
+
+BUY ME A COFFEE
+Sign up to our newsletter and get our latest tutorials and news straight to your mailbox.
+
+Your email...
+Subscribe
+We’ll never share your email address or spam you.
+
+Related Articles
+MAY 14, 2018
+
+How to Install Node.js and npm on Ubuntu 18.04
+Install Node.js and npm on Ubuntu 18.04
+MAY 26, 2020
+
+How to Install Yarn on Ubuntu 20.04
+Install Yarn on Ubuntu 20.04
+OCT 24, 2019
+
+How to Install Node.js and npm on CentOS 8
+Install Node.js and npm on CentOS 8 Linux
+Write a comment
+© 2021 Linuxize.com
+Privacy Policy Terms Contact Advertise on Linuxize
+
+
+
+nvm install & update
+
+<install>
+https://github.com/nvm-sh/nvm#installing-and-updating
+
+1. curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+2. vi correct profile(~/.bash_profile, ~/.zshrc, ~/.profile, or ~/.bashrc)
+
+3. add this stuff
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+version : v0.39.1
+
+<update>
+
+(
+  cd "$NVM_DIR"
+  git fetch --tags origin
+  git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
+) && \. "$NVM_DIR/nvm.sh"

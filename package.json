@@ -1,0 +1,23 @@
+{
+  "name": "expressJs_Basic",
+  "version": "1.0.0",
+  "description": "ExpressJs_Basic",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ejqhdl337/ExpressJs_Basic.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ejqhdl337/ExpressJs_Basic/issues"
+  },
+  "homepage": "https://github.com/ejqhdl337/ExpressJs_Basic#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
