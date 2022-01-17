@@ -1,0 +1,16 @@
+{
+  "name": "server_basic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Basic_http1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.1.3",
+    "lodash": "^4.17.21"
+  }
+}
