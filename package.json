@@ -2,11 +2,10 @@
   "name": "expressJs_Basic",
   "version": "1.0.0",
   "description": "ExpressJs_Basic",
-  "main": "index.js",
-	"type": "module",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
