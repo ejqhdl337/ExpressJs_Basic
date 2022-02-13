@@ -1,8 +1,16 @@
 const express = require('express')
 
-const users = require('./routes/users')
+const users = require('./routes/users_mongo')
 
 const app = express()
+
+const mongoose = require("mongoose")
+
+mongoose.connect("mongodb://localhost/userdb",()=>{
+	console.log("mongodb connected")
+},(error)=>{
+	console.log(`mongodb connect error : ${error}`)
+})
 
 
 app.use(express.static('./public'))
