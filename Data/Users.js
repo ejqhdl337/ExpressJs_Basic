@@ -18,7 +18,7 @@ const userSchema = mongoose.Schema({
 	address : adressSchema,
 	recommender : {
 		type : mongoose.SchemaTypes.ObjectId,
-		ref : "User id"
+		ref : "Users"
 	},
 	insertTime : {
 		type : Date,
@@ -29,6 +29,11 @@ const userSchema = mongoose.Schema({
 		type : Date,
 		default : () => Date.now()
 	}
+})
+
+userSchema.pre("save",(next)=>{
+	this.updateTime = Date.now()
+	next()
 })
 
 module.exports = mongoose.model("Users",userSchema)
