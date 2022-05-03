@@ -1,9 +1,0 @@
-// manual approach (create package.json in the root, create propertie etc)
-// npm init (step by step, press enter the skip)
-// npm init -y (create default file imediately)
-
-//npm install -g <package name> (install pakage globally)
-//npm i <package name> (install pakage local)
-//if you install some package, npm automatically install that needed
-//dependencies
-
